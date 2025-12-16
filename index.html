@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUTBOL Y FILO - Agenda de Turnos</title>
+    <link rel="stylesheet" href="styles_barbershop.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.jpg" alt="FUTBOL Y FILO Logo" style="max-width: 150px; margin-bottom: 10px;">
+            <h1>⚽ FUTBOL Y FILO - Agenda de Turnos</h1>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="mostrarSeccion('agenda')">📅 Agenda</button>
+            <button class="tab-btn" onclick="mostrarSeccion('nuevo-turno')">➕ Nuevo Turno</button>
+            <button class="tab-btn" onclick="mostrarSeccion('clientes')">👥 Clientes</button>
+        </div>
+
+        <!-- SECCIÓN AGENDA -->
+        <section id="agenda" class="seccion active">
+            <div class="filtro-fecha">
+                <label>Fecha:</label>
+                <input type="date" id="filtroFecha" onchange="cargarTurnosPorFecha()">
+                <button onclick="cargarTurnos()">Ver Todos</button>
+            </div>
+
+            <div id="listaTurnos" class="lista-turnos"></div>
+        </section>
+
+        <!-- SECCIÓN NUEVO TURNO -->
+        <section id="nuevo-turno" class="seccion">
+            <h2>Agendar Nuevo Turno</h2>
+            <form id="formTurno" onsubmit="guardarTurno(event)">
+                <div class="form-group">
+                    <label>Cliente:</label>
+                    <select id="clienteSelect" required>
+                        <option value="">Seleccionar cliente...</option>
+                    </select>
+                    <button type="button" onclick="mostrarFormCliente()">+ Nuevo Cliente</button>
+                </div>
+
+                <div id="formNuevoCliente" style="display:none;">
+                    <input type="text" id="nuevoClienteNombre" placeholder="Nombre completo">
+                    <input type="tel" id="nuevoClienteTelefono" placeholder="Teléfono">
+                    <input type="email" id="nuevoClienteEmail" placeholder="Email (opcional)">
+                    <button type="button" onclick="guardarCliente()">Guardar Cliente</button>
+                    <button type="button" onclick="cancelarFormCliente()">Cancelar</button>
+                </div>
+
+                <div class="form-group">
+                    <label>Servicio:</label>
+                    <select id="servicioSelect" required></select>
+                </div>
+
+                <div class="form-group">
+                    <label>Fecha:</label>
+                    <input type="date" id="turnoFecha" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Hora:</label>
+                    <input type="time" id="turnoHora" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Observaciones:</label>
+                    <textarea id="turnoObservaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">Guardar Turno</button>
+            </form>
+        </section>
+
+        <!-- SECCIÓN CLIENTES -->
+        <section id="clientes" class="seccion">
+            <h2>Lista de Clientes</h2>
+            <div id="listaClientes" class="lista-clientes"></div>
+        </section>
+    </div>
+
+    <script src="script_barbershop.js"></script>
+</body>
+</html>

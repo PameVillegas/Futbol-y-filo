@@ -1,0 +1,21 @@
+{
+  "name": "futbol-y-filo",
+  "version": "1.0.0",
+  "description": "Sistema de agenda de turnos para FUTBOL Y FILO",
+  "main": "server_barbershop.js",
+  "scripts": {
+    "start": "node server_barbershop.js"
+  },
+  "keywords": ["agenda", "turnos", "barbershop"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^3.6.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
