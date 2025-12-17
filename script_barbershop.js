@@ -1,4 +1,6 @@
-const API_URL = 'http://localhost:3001/api';
+const API_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:3001/api' 
+    : '/api';
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,7 +20,12 @@ function mostrarSeccion(seccionId) {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     
     document.getElementById(seccionId).classList.add('active');
-    event.target.classList.add('active');
+    
+    // Activar el botón correspondiente
+    const tabs = document.querySelectorAll('.tab-btn');
+    if (seccionId === 'agenda') tabs[0].classList.add('active');
+    if (seccionId === 'nuevo-turno') tabs[1].classList.add('active');
+    if (seccionId === 'clientes') tabs[2].classList.add('active');
     
     if (seccionId === 'clientes') {
         cargarListaClientes();
@@ -105,12 +112,13 @@ async function guardarCliente() {
             mostrarMensaje('Cliente guardado exitosamente', 'exito');
             cancelarFormCliente();
             await cargarClientes();
+            await cargarListaClientes();
         } else {
-            mostrarMensaje('Error al guardar cliente', 'error');
+            mostrarMensaje('Error al guardar cliente: ' + (data.error || 'Error desconocido'), 'error');
         }
     } catch (error) {
         console.error('Error:', error);
-        mostrarMensaje('Error de conexión', 'error');
+        mostrarMensaje('Error de conexión: ' + error.message, 'error');
     }
 }
 
